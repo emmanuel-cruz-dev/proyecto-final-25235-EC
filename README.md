@@ -15,3 +15,7 @@
 * **NProgress**: Barra de progreso superior para mejorar la experiencia de navegación.
 * **Lucide-React**: Iconos vectoriales y colores.
 * **Swiper**: Librería para la creación de carrusels.
+
+## 🌐 API Utilizada
+
+Este proyecto utiliza una API creada en [**MockAPI**](https://mockapi.io/) para obtener datos de productos 🛍️.
