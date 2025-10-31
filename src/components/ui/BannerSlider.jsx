@@ -6,9 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { heroBannerImgs } from "../../data/heroBannerImgs";
-
-function BannerSlider() {
+function BannerSlider({ bannerImages }) {
   return (
     <section className="p-0 m-0" id="hero-banner">
       <Swiper
@@ -24,7 +22,7 @@ function BannerSlider() {
         navigation={true}
         modules={[Navigation, Pagination, Autoplay]}
       >
-        {heroBannerImgs.map((img, index) => (
+        {bannerImages.map((img, index) => (
           <SwiperSlide key={index}>
             <img
               src={img}
