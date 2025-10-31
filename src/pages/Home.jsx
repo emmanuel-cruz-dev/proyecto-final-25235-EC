@@ -1,7 +1,9 @@
 import React from "react";
+import BannerSlider from "../components/ui/BannerSlider";
+import { heroBannerImgs } from "../data/heroBannerImgs";
 
 function Home() {
-  return <div>Home</div>;
+  return <BannerSlider bannerImages={heroBannerImgs} />;
 }
 
 export default Home;
