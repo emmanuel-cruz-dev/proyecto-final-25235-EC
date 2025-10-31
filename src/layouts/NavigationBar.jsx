@@ -11,7 +11,15 @@ function NavigationBar() {
           to="/"
           className="d-flex align-items-center justify-content-center gap-2"
         >
-          E-Shop
+          <img
+            src="/nova-store.svg"
+            style={{ width: "30px", height: "30px" }}
+            alt="Logo de NovaStore"
+            loading="lazy"
+            width="200"
+            height="200"
+          />
+          NovaStore
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar" />
         <Navbar.Collapse id="main-navbar">
