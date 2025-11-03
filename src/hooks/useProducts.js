@@ -21,3 +21,24 @@ export const useProducts = () => {
 
   return { products, loading, error };
 };
+
+export const useProductById = (id) => {
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    try {
+      productService.getProductById(id).then((data) => {
+        setProduct(data);
+      });
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [id]);
+
+  return { product, loading, error };
+};
