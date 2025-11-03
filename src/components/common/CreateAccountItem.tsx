@@ -28,7 +28,7 @@ function CreateAccountItem() {
         <Link to="/register" className="d-flex justify-content-end mt-3">
           <Button
             variant="primary"
-            className="px-4 py-2"
+            className="px-5 py-2"
             style={{ borderRadius: "25px", fontWeight: "500" }}
           >
             Crear cuenta
