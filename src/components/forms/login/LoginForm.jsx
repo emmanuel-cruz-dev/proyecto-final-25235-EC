@@ -39,7 +39,7 @@ function LoginForm() {
         <div className="position-relative">
           <Form.Control
             type={showPassword ? "text" : "password"}
-            placeholder="Aa12345"
+            placeholder="********"
             value={loginData.password}
             onChange={(e) =>
               setLoginData({
@@ -74,14 +74,19 @@ function LoginForm() {
         </div>
       </Form.Group>
 
-      <Button
-        variant="primary"
-        type="submit"
-        className="w-100 py-2 mt-4"
-        style={{ borderRadius: "25px", fontWeight: "500" }}
+      <footer
+        className="d-flex justify-content-end"
+        style={{ marginTop: "2rem" }}
       >
-        Iniciar Sesión
-      </Button>
+        <Button
+          variant="primary"
+          type="submit"
+          className="px-5 py-2"
+          style={{ borderRadius: "25px", fontWeight: "500" }}
+        >
+          Iniciar Sesión
+        </Button>
+      </footer>
     </Form>
   );
 }
