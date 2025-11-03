@@ -44,3 +44,17 @@
   margin: 0;
   padding: 0;
 }
+
+.custom-bullet {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.custom-bullet::before {
+  content: "•";
+  color: #007bff;
+  font-size: 1.75rem;
+  position: absolute;
+  left: 0;
+  top: -8px;
+}
