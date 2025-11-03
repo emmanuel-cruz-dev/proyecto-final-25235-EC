@@ -30,7 +30,23 @@ const getUserById = async (id) => {
   }
 };
 
+const getUserByRole = async (role) => {
+  try {
+    const response = await axios.get(`/users?role=${role}`);
+
+    if (!response.data) {
+      throw new Error("Empty response from server");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user by role", error);
+    throw error;
+  }
+};
+
 export const userService = {
   getUsers,
   getUserById,
+  getUserByRole,
 };
