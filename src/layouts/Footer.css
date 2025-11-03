@@ -1,7 +1,6 @@
 .footer {
   margin-top: auto;
   background-color: #f8f9fa;
-  border-top: 1px solid #dee2e6;
 
   .hover-primary:hover {
     color: #0d6efd !important;

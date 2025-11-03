@@ -13,7 +13,7 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <footer className="footer bg-black text-white border-top">
+    <footer className="footer bg-black text-white" id="footer">
       <Container className="py-4">
         <Row className="g-4 pt-3">
           <Col xs={12} md={6} lg={3}>
