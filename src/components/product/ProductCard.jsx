@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import { formatPrice } from "../../utils/utils";
 
 function ProductCard({ id, name, price, description, image, isLoading }) {
   if (isLoading) return <p>Loading...</p>;
@@ -34,7 +35,7 @@ function ProductCard({ id, name, price, description, image, isLoading }) {
           className="mb-1"
           style={{ color: "blue", fontSize: "1.2rem", fontWeight: "500" }}
         >
-          ${price}
+          ${formatPrice(price)}
         </Card.Text>
         <Card.Text className="line-clamp-2 text-secondary">
           {description}
