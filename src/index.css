@@ -70,3 +70,44 @@
 .swiper-button-prev:hover {
   transform: scale(1.1);
 }
+
+.swiper-button-next-custom,
+.swiper-button-prev-custom {
+  transition: transform 0.3s ease-in-out;
+}
+
+.swiper-button-next-custom:hover,
+.swiper-button-prev-custom:hover {
+  transform: scale(1.05);
+}
+
+.scroll-to-top-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #007bff;
+  color: white;
+  padding: 6px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  z-index: 50;
+}
+
+.scroll-to-top-button:hover {
+  background-color: black;
+}
+
+.scroll-to-top-button .icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .scroll-to-top-button {
+    bottom: 32px;
+    right: 32px;
+  }
+}
