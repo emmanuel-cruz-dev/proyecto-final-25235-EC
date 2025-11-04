@@ -58,3 +58,15 @@
   left: 0;
   top: -8px;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  transition: transform 0.3s ease-in-out;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  transform: scale(1.1);
+}
