@@ -30,7 +30,23 @@ const getProductById = async (id) => {
   }
 };
 
+const getActiveProducts = async () => {
+  try {
+    const response = await axios.get(`/products?isActive=true`);
+
+    if (!response.data) {
+      throw new Error("Empty response from server");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching products", error);
+    throw error;
+  }
+};
+
 export const productService = {
   getProducts,
   getProductById,
+  getActiveProducts,
 };
