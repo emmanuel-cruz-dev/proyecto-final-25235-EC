@@ -4,6 +4,7 @@ import Footer from "./layouts/Footer";
 import AppRouter from "./routes/AppRouter";
 import ScrollToTop from "./helpers/ScrollToTop";
 import ProgressBar from "./components/ui/ProgressBar";
+import ScrollToTopButton from "./components/common/ScrollToTopButton";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         </main>
         <Footer />
       </div>
-
+      <ScrollToTopButton />
       <ScrollToTop />
     </Router>
   );
