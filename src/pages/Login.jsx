@@ -14,7 +14,7 @@ function Login() {
       }}
     >
       <Container>
-        <header className="mb-2">
+        <header className="mb-2 text-center">
           <h1 className="text-primary" style={{ fontWeight: "bold" }}>
             Bienvenido de nuevo
           </h1>
