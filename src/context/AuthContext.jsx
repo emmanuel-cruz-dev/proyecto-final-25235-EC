@@ -23,7 +23,8 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     const response = await axios.post("/users", userData);
-    const newUser = await response.json();
+    const newUser = response.data;
+
     setUser(newUser);
     localStorage.setItem("user", JSON.stringify(newUser));
     setIsAuthenticated(true);
@@ -32,8 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const response = await axios.get(`/users?email=${email}`);
-    const users = await response.json();
-
+    const users = response.data;
     const foundUser = users.find((u) => u.password === password);
 
     if (foundUser) {
@@ -51,9 +51,22 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
   };
 
+  const updateUserProfile = async (updateUserData) => {
+    setUser(updateUserData);
+    localStorage.setItem("user", JSON.stringify(updateUserData));
+  };
+
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, user, login, register, logout, loading }}
+      value={{
+        isAuthenticated,
+        user,
+        login,
+        register,
+        logout,
+        loading,
+        updateUserProfile,
+      }}
     >
       {children}
     </AuthContext.Provider>
