@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { ShoppingCart, ChevronDown, User, LogOut } from "lucide-react";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../hooks/useAuth";
 
 function NavigationBar() {
   const { user, isAuthenticated, logout } = useContext(AuthContext);
