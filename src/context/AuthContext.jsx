@@ -1,7 +1,6 @@
-import { createContext, useState, useEffect } from "react";
-
-const BASE_URL = import.meta.env.VITE_BASE_API_URL;
-export const AuthContext = createContext();
+import { useState, useEffect } from "react";
+import { AuthContext } from "../hooks/useAuth";
+import axios from "../api/axiosConfig";
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -23,12 +22,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const register = async (userData) => {
-    const response = await fetch(`${BASE_URL}/users`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userData),
-    });
-
+    const response = await axios.post("/users", userData);
     const newUser = await response.json();
     setUser(newUser);
     localStorage.setItem("user", JSON.stringify(newUser));
@@ -37,7 +31,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const response = await fetch(`${BASE_URL}/users?email=${email}`);
+    const response = await axios.get(`/users?email=${email}`);
     const users = await response.json();
 
     const foundUser = users.find((u) => u.password === password);
