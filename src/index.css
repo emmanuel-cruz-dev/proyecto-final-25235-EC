@@ -73,12 +73,18 @@
 
 .swiper-button-next-custom,
 .swiper-button-prev-custom {
-  transition: transform 0.3s ease-in-out;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #007bff;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  background-color: transparent;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .swiper-button-next-custom:hover,
 .swiper-button-prev-custom:hover {
-  transform: scale(1.05);
+  background-color: rgb(230, 230, 230);
 }
 
 .scroll-to-top-button {
