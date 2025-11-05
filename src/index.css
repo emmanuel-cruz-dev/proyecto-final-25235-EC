@@ -113,7 +113,7 @@
 
 @media (min-width: 1024px) {
   .scroll-to-top-button {
-    bottom: 32px;
-    right: 32px;
+    bottom: 24px;
+    right: 24px;
   }
 }
