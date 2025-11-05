@@ -7,8 +7,9 @@ import {
   Youtube,
   Phone,
   Clock,
+  Building,
+  Mail,
 } from "lucide-react";
-import ECLogo from "../assets/e-logo.avif";
 import "./Footer.css";
 
 function Footer() {
@@ -16,77 +17,122 @@ function Footer() {
     <footer className="footer bg-black text-white" id="footer">
       <Container className="py-4">
         <Row className="g-4 pt-3">
-          <Col xs={12} md={6} lg={3}>
+          <Col xs={12} md={6} lg={2} xl={3}>
             <header className="mb-3">
               <h4 className="fw-bold mb-3">NovaStore</h4>
               <p className="mb-2 fw-semibold">Atención al cliente:</p>
               <p className="mb-0">0810-222-2800</p>
             </header>
 
-            <div className="d-flex gap-3 mt-3">
-              <a
-                href="#"
-                className="text-white hover-primary"
-                aria-label="Facebook"
-              >
-                <Facebook size={24} />
-              </a>
-              <a
-                href="#"
-                className="text-white hover-primary"
-                aria-label="Instagram"
-              >
-                <Instagram size={24} />
-              </a>
-              <a
-                href="#"
-                className="text-white hover-primary"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={24} />
-              </a>
-              <a
-                href="#"
-                className="text-white hover-primary"
-                aria-label="YouTube"
-              >
-                <Youtube size={24} />
-              </a>
-            </div>
+            <ul className="d-flex gap-3 mt-3 list-unstyled">
+              <li>
+                <a
+                  href="#"
+                  className="text-white hover-primary"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={24} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-white hover-primary"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={24} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-white hover-primary"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={24} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-white hover-primary"
+                  aria-label="YouTube"
+                >
+                  <Youtube size={24} />
+                </a>
+              </li>
+            </ul>
           </Col>
 
-          <Col xs={12} md={6} lg={3}>
+          <Col xs={12} md={6} lg={3} xl={2}>
             <h6 className="fw-bold mb-3">Atención al cliente</h6>
-            <div className="d-flex align-items-center mb-2">
-              <Phone size={18} className="me-2 text-primary" />
-              <ul className="small list-unstyled">
-                <li>0800 122 0338</li>
-                <li>0810 999 3728</li>
-              </ul>
+            <div className="d-flex align-items-center mb-3">
+              <Phone size={18} className="me-2 text-primary flex-shrink-0" />
+              <div className="small mb-0">
+                <div className="fw-medium">0800 122 0338</div>
+                <div style={{ color: "#6c757d" }}>Línea gratuita</div>
+              </div>
             </div>
-            <div className="d-flex align-items-start mt-3">
-              <Clock size={18} className="me-2 text-primary mt-1" />
-              <ul className="small list-unstyled">
-                <li>LU-VI de 09 a 18</li>
-                <li>SA de 9 a 13</li>
-              </ul>
+
+            <div className="d-flex align-items-center mb-3">
+              <Clock size={18} className="me-2 text-primary flex-shrink-0" />
+              <div className="small mb-0">
+                <div>Lun a Vier 9 a 18 hs</div>
+                <div>Sábados 9 a 13 hs</div>
+              </div>
             </div>
           </Col>
 
-          <Col xs={12} md={6} lg={3}>
+          <Col xs={12} md={6} lg={3} xl={2}>
             <h6 className="fw-bold mb-3">Venta telefónica</h6>
-            <div className="d-flex align-items-center mb-2">
-              <Phone size={18} className="me-2 text-primary" />
-              <ul className="small list-unstyled">
-                <li>0810 333 8700</li>
-                <li>Lu- Mier de 08 a 23</li>
-              </ul>
+            <div className="d-flex align-items-center mb-3">
+              <Phone size={18} className="me-2 text-primary flex-shrink-0" />
+              <div className="small mb-0">
+                <div className="fw-medium">0810 333 8700</div>
+                <div style={{ color: "#6c757d" }}>Línea nacional</div>
+              </div>
+            </div>
+            <div className="d-flex align-items-center mb-3">
+              <Clock size={18} className="me-2 text-primary flex-shrink-0" />
+              <div className="small mb-0">
+                <div>Lun a Miér 8 a 23 hs</div>
+                <div>Jue a Vier 8 a 20 hs</div>
+              </div>
             </div>
           </Col>
 
-          <Col xs={12} md={6} lg={3}>
+          <Col xs={12} md={6} lg={3} xl={2}>
             <h6 className="fw-bold mb-3">Servicios a empresas</h6>
-            <p className="small mb-0">Ventas corporativas</p>
+            <div className="d-flex align-items-center mb-3">
+              <Building size={18} className="me-2 text-primary flex-shrink-0" />
+              <div className="small mb-0">
+                <div className="fw-medium">Ventas corporativas</div>
+                <div style={{ color: "#6c757d" }}>Soluciones de ventas</div>
+              </div>
+            </div>
+            <div className="d-flex align-items-center mb-3">
+              <Mail size={18} className="me-2 text-primary flex-shrink-0" />
+              <div className="small mb-0">
+                <div className="fw-medium">empresas@tienda.com</div>
+                <div style={{ color: "#6c757d" }}>Contacto directo</div>
+              </div>
+            </div>
+          </Col>
+
+          <Col xs={12} md={6} lg={3} xl={3}>
+            <h6 className="fw-bold mb-3">Medios de pago</h6>
+            <div className="small mb-3">
+              <div className="fw-medium">Aceptamos todas las tarjetas</div>
+              <div style={{ color: "#6c757d" }}>
+                Crédito, Débito y Transferencias
+              </div>
+            </div>
+            <div className="small">
+              <div className="fw-medium">Financiación disponible</div>
+              <div style={{ color: "#6c757d" }}>
+                Hasta 12 cuotas sin interés
+              </div>
+            </div>
           </Col>
         </Row>
 
@@ -95,18 +141,8 @@ function Footer() {
         <Row className="align-items-center">
           <Col xs={12} lg={8} className="mb-3 mb-lg-0">
             <p className="mb-1 small fw-semibold">
-              Copyright © 2025 NovaStore (NOVASTORE S.A CUIT 33-70871199-9)
-              Todos los derechos reservados
-            </p>
-            <p className="mb-0 small" style={{ color: "#6c757d" }}>
-              Las imágenes son meramente ilustrativas; los precios y stock
-              pueden variar sin previo aviso.
-            </p>
-          </Col>
-
-          <Col xs={12} lg={4} style={{ textAlign: "right" }}>
-            <p className="mb-0 small">
-              Argentina · Desarrollado por{" "}
+              Copyright © 2025 NovaStore. Todos los derechos reservados.
+              Desarrollado por{" "}
               <a
                 href="https://emmanuel-cruz.netlify.app/"
                 target="_blank"
@@ -115,20 +151,17 @@ function Footer() {
                 aria-label="Emmanuel Cruz"
                 title="Emmanuel Cruz Portfolio"
               >
-                <img
-                  src={ECLogo}
-                  alt="Emmanuel Cruz Logo"
-                  style={{
-                    width: "1.4rem",
-                    height: "auto",
-                    objectFit: "cover",
-                  }}
-                  width="320"
-                  height="320"
-                />
+                Emmanuel Cruz
               </a>
+              .
+            </p>
+            <p className="mb-0 small" style={{ color: "#6c757d" }}>
+              Las imágenes son meramente ilustrativas; los precios y stock
+              pueden variar sin previo aviso.
             </p>
           </Col>
+
+          <Col xs={12} lg={4} style={{ textAlign: "right" }}></Col>
         </Row>
       </Container>
     </footer>
