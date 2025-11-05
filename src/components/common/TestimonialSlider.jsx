@@ -37,23 +37,13 @@ function TestimonialSlider() {
           <aside className="d-flex gap-3">
             <button
               ref={prevRef}
-              className="swiper-button-prev-custom border-0 bg-transparent"
-              style={{
-                fontSize: "1.5rem",
-                cursor: "pointer",
-                color: "#007bff",
-              }}
+              className="swiper-button-prev-custom border-0"
             >
               ❮
             </button>
             <button
               ref={nextRef}
-              className="swiper-button-next-custom border-0 bg-transparent"
-              style={{
-                fontSize: "1.5rem",
-                cursor: "pointer",
-                color: "#007bff",
-              }}
+              className="swiper-button-next-custom border-0"
             >
               ❯
             </button>
