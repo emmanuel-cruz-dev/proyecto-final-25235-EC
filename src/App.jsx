@@ -5,18 +5,21 @@ import AppRouter from "./routes/AppRouter";
 import ScrollToTop from "./helpers/ScrollToTop";
 import ProgressBar from "./components/ui/ProgressBar";
 import ScrollToTopButton from "./components/common/ScrollToTopButton";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
     <Router>
-      <ProgressBar />
-      <div className="d-flex flex-column min-vh-100">
-        <NavigationBar />
-        <main className="flex-grow-1 bg-light">
-          <AppRouter />
-        </main>
-        <Footer />
-      </div>
+      <CartProvider>
+        <ProgressBar />
+        <div className="d-flex flex-column min-vh-100">
+          <NavigationBar />
+          <main className="flex-grow-1 bg-light">
+            <AppRouter />
+          </main>
+          <Footer />
+        </div>
+      </CartProvider>
       <ScrollToTopButton />
       <ScrollToTop />
     </Router>
