@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { Eye, EyeOff } from "lucide-react";
 import { AuthContext } from "../../../hooks/useAuth";
@@ -8,12 +8,17 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleLoginSubmit = (e) => {
+  const from = location.state?.from.pathname || "/";
+
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      login(loginData.email, loginData.password);
+      await login(loginData.email, loginData.password);
+      navigate(from, { replace: true });
       console.log("Login exitoso", loginData);
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
