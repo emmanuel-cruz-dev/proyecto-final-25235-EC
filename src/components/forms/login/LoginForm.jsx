@@ -1,16 +1,23 @@
-import React from "react";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { Eye, EyeOff } from "lucide-react";
+import { AuthContext } from "../../../hooks/useAuth";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const { login } = useContext(AuthContext);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    console.log("Login:", loginData);
-    // TODO agregar lógica de login
+
+    try {
+      login(loginData.email, loginData.password);
+      console.log("Login exitoso", loginData);
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+    }
   };
 
   return (
@@ -75,17 +82,20 @@ function LoginForm() {
       </Form.Group>
 
       <footer
-        className="d-flex justify-content-end"
+        className="d-flex flex-column justify-content-end flex-lg-row"
         style={{ marginTop: "2rem" }}
       >
         <Button
           variant="primary"
           type="submit"
-          className="px-5 py-2"
+          className="px-5 py-2 flex-grow-1 flex-md-grow-0"
           style={{ borderRadius: "25px", fontWeight: "500" }}
         >
           Iniciar Sesión
         </Button>
+        <p className="d-lg-none text-muted text-center mt-3 mb-0">
+          ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
+        </p>
       </footer>
     </Form>
   );
