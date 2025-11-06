@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 
 const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
@@ -13,8 +14,22 @@ function AppRouter() {
     <Suspense fallback={<div>Cargando...</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
         <Route
           path="/profile"
           element={
