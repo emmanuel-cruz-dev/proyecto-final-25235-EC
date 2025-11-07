@@ -63,3 +63,24 @@ export const useActiveProducts = () => {
 
   return { products, loading, error };
 };
+
+export const useProductsByCategory = (category) => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    try {
+      productService.getProductsByCategory(category).then((data) => {
+        setProducts(data);
+      });
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [category]);
+
+  return { products, loading, error };
+};
