@@ -45,8 +45,26 @@ const getActiveProducts = async () => {
   }
 };
 
+const getProductsByCategory = async (category) => {
+  try {
+    const url =
+      category === "all" ? "/products" : `/products?category=${category}`;
+    const response = await axios.get(url);
+
+    if (!response.data) {
+      throw new Error("Empty response from server");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching products", error);
+    throw error;
+  }
+};
+
 export const productService = {
   getProducts,
   getProductById,
   getActiveProducts,
+  getProductsByCategory,
 };
