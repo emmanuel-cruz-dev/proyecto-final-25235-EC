@@ -19,7 +19,6 @@ function LoginForm() {
     try {
       await login(loginData.email, loginData.password);
       navigate(from, { replace: true });
-      console.log("Login exitoso", loginData);
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
