@@ -27,36 +27,36 @@ function OrderSummary() {
           <Card.Body>
             <h4 className="mb-4">Resumen del pedido</h4>
 
-            <div className="d-flex justify-content-between mb-2">
-              <span className="text-muted">Subtotal</span>
-              <span className="fw-semibold">{formatPrice(getCartTotal())}</span>
-            </div>
+            <ul className="d-flex justify-content-between mb-2 list-unstyled">
+              <li className="text-muted">Subtotal</li>
+              <li className="fw-semibold">${formatPrice(getCartTotal())}</li>
+            </ul>
 
-            <div className="d-flex justify-content-between mb-2">
-              <span className="text-muted">Envío</span>
-              <span className="fw-semibold">
-                {getCartTotal() > 150 ? (
+            <ul className="d-flex justify-content-between mb-2 list-unstyled">
+              <li className="text-muted">Envío</li>
+              <li className="fw-semibold">
+                {getCartTotal() > 100000 ? (
                   <span className="text-success">Gratis</span>
                 ) : (
-                  "$5.00"
+                  "$5,000"
                 )}
-              </span>
-            </div>
+              </li>
+            </ul>
 
-            {getCartTotal() > 0 && getCartTotal() < 150 && (
+            {getCartTotal() > 0 && getCartTotal() < 100000 && (
               <small className="text-muted" style={{ fontSize: "0.8rem" }}>
-                Envío gratis a partir de $150
+                Envío gratis a partir de $100,000
               </small>
             )}
 
             <hr />
 
-            <div className="d-flex justify-content-between mb-4">
-              <span className="fw-bold fs-5">Total</span>
-              <span className="fw-bold fs-5 text-primary">
-                ${formatPrice(calculateTotal())}
-              </span>
-            </div>
+            <ul className="d-flex justify-content-between mb-4 list-unstyled">
+              <li className="fw-bold fs-5">Total</li>
+              <li className="fw-bold fs-5 text-primary">
+                {formatPrice(calculateTotal())}
+              </li>
+            </ul>
 
             <Button
               variant="primary"
