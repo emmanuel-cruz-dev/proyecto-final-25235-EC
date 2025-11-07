@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { ShoppingCart, ChevronDown, User, LogOut } from "lucide-react";
 import { AuthContext } from "../hooks/useAuth";
+import { useCart } from "../hooks/useCart";
 
 function NavigationBar() {
   const { user, isAuthenticated, logout } = useContext(AuthContext);
+  const { getCartItemsCount } = useCart();
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
@@ -63,26 +65,14 @@ function NavigationBar() {
               <Nav.Link
                 as={Link}
                 to="/cart"
-                className="cart__items-container position-relative"
+                className="cart__items-container"
                 aria-label="Carrito"
                 title="Ir al carrito"
               >
                 <ShoppingCart size={20} className="me-2" />
-                <p
-                  className="bg-primary text-white rounded-circle"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "20px",
-                    height: "20px",
-                    position: "absolute",
-                    top: "1px",
-                    right: "-1px",
-                  }}
-                >
-                  0
-                </p>
+                {getCartItemsCount() > 0 && (
+                  <p className="cart__items-badge">{getCartItemsCount()}</p>
+                )}
               </Nav.Link>
             )}
 
