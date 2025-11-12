@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   });
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("isAuthenticated", isAuthenticated);
@@ -22,27 +23,87 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const register = async (userData) => {
-    const response = await axios.post("/users", userData);
-    const newUser = response.data;
+    setAuthLoading(true);
 
-    setUser(newUser);
-    localStorage.setItem("user", JSON.stringify(newUser));
-    setIsAuthenticated(true);
-    return newUser;
+    try {
+      let existingUsers = [];
+
+      try {
+        const response = await axios.get(`/users?email=${userData.email}`);
+        existingUsers = response.data || [];
+      } catch (error) {
+        if (error.response && error.response.status !== 404) {
+          throw error;
+        }
+      }
+
+      if (existingUsers.length > 0) {
+        throw new Error("El correo electrónico ya está registrado");
+      }
+
+      const newUserData = {
+        ...userData,
+        role: "customer",
+        createdAt: new Date().toISOString(),
+        avatar:
+          userData.avatar && userData.avatar.trim() !== ""
+            ? userData.avatar
+            : "https://i.imgur.com/p4HoTq6.jpeg",
+      };
+
+      const response = await axios.post("/users", newUserData);
+      const newUser = response.data;
+
+      setUser(newUser);
+      localStorage.setItem("user", JSON.stringify(newUser));
+      setIsAuthenticated(true);
+
+      return newUser;
+    } catch (error) {
+      console.error("Error en registro:", error.message);
+      throw error;
+    } finally {
+      setAuthLoading(false);
+    }
   };
 
   const login = async (email, password) => {
-    const response = await axios.get(`/users?email=${email}`);
-    const users = response.data;
-    const foundUser = users.find((u) => u.password === password);
+    setAuthLoading(true);
 
-    if (foundUser) {
+    try {
+      let users = [];
+
+      try {
+        const response = await axios.get(`/users?email=${email}`);
+        users = response.data || [];
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          throw new Error("El correo electrónico no está registrado");
+        }
+
+        throw error;
+      }
+
+      if (users.length === 0) {
+        throw new Error("El correo electrónico no está registrado");
+      }
+
+      const foundUser = users.find((u) => u.password === password);
+
+      if (!foundUser) {
+        throw new Error("La contraseña es incorrecta");
+      }
+
       setIsAuthenticated(true);
       setUser(foundUser);
       localStorage.setItem("user", JSON.stringify(foundUser));
       return foundUser;
+    } catch (error) {
+      console.error("Error en login:", error.message);
+      throw error;
+    } finally {
+      setAuthLoading(false);
     }
-    throw new Error("Credenciales incorrectas");
   };
 
   const logout = () => {
@@ -65,6 +126,7 @@ export const AuthProvider = ({ children }) => {
         register,
         logout,
         loading,
+        authLoading,
         updateUserProfile,
       }}
     >
