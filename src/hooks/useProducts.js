@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { productService } from "../api/services/product.service";
 
-export const useProducts = () => {
+export const useProducts = (page, limit) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -9,7 +9,7 @@ export const useProducts = () => {
   useEffect(() => {
     setLoading(true);
     try {
-      productService.getProducts().then((data) => {
+      productService.getProducts(page, limit).then((data) => {
         setProducts(data);
       });
     } catch (error) {
@@ -17,7 +17,7 @@ export const useProducts = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [page, limit]);
 
   return { products, loading, error };
 };
@@ -81,6 +81,27 @@ export const useProductsByCategory = (category) => {
       setLoading(false);
     }
   }, [category]);
+
+  return { products, loading, error };
+};
+
+export const usePaginatedProducts = (page, limit) => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    try {
+      productService.getPaginatedProducts(page, limit).then((data) => {
+        setProducts(data);
+      });
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [page, limit]);
 
   return { products, loading, error };
 };
