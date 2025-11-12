@@ -1,38 +1,16 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { ShoppingCart, ChevronDown, User, LogOut } from "lucide-react";
 import { AuthContext } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
+import { useNavigationBar } from "../hooks/useNavigationBar";
 
 function NavigationBar() {
-  const { user, isAuthenticated, logout } = useContext(AuthContext);
   const { getCartItemsCount } = useCart();
-  const [showMenu, setShowMenu] = useState(false);
-  const menuRef = useRef(null);
-  const navigate = useNavigate();
-
-  const toggleMenu = () => setShowMenu((prev) => !prev);
-
-  const handleLogout = () => {
-    logout();
-    setShowMenu(false);
-  };
-
-  const handleNavigate = () => {
-    setShowMenu(false);
-    navigate("/profile");
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const { user, isAuthenticated } = useContext(AuthContext);
+  const { showMenu, toggleMenu, handleLogout, handleNavigate, menuRef } =
+    useNavigationBar();
 
   return (
     <Navbar bg="black" variant="dark" expand="lg" sticky="top">
@@ -118,7 +96,11 @@ function NavigationBar() {
                       zIndex: 1000,
                     }}
                   >
-                    <div className="px-2 py-1 border-bottom border-secondary d-flex align-items-center pb-2">
+                    <button
+                      onClick={handleNavigate}
+                      className="user-menu__button"
+                      title="Ver perfil"
+                    >
                       <img
                         src={user.avatar}
                         alt="Avatar"
@@ -127,7 +109,8 @@ function NavigationBar() {
                         loading="lazy"
                       />
                       {user.firstName} {user.lastName}
-                    </div>
+                    </button>
+                    <hr className="my-1" />
                     <button
                       onClick={handleNavigate}
                       className="user-menu__button mt-2"
