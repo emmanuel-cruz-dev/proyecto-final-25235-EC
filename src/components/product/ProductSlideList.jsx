@@ -6,14 +6,14 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import ProductCard from "./ProductCard";
 import ErrorMessage from "../common/ErrorMessage";
 import { handleRetry } from "../../utils/utils";
-import { useActiveProducts } from "../../hooks/useProducts";
+import { usePaginatedProducts } from "../../hooks/useProducts";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 function ProductSlideList({ title }) {
-  const { products, loading, error } = useActiveProducts();
+  const { products, loading, error } = usePaginatedProducts(1, 6);
 
   return (
     <Container
@@ -64,7 +64,7 @@ function ProductSlideList({ title }) {
             />
           </Container>
         ) : (
-          products.slice(0, 5).map((product, index) => (
+          products.map((product, index) => (
             <SwiperSlide key={`${product.id}-${index}`}>
               <ProductCard
                 id={product.id}
