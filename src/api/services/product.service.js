@@ -1,8 +1,10 @@
 import axios from "../axiosConfig";
 
-const getProducts = async () => {
+const getProducts = async (page, limit, status = "true") => {
   try {
-    const response = await axios.get("/products");
+    const baseUrl = `/products?page=${page}&limit=${limit}`;
+    const url = status === "all" ? baseUrl : `${baseUrl}&isActive=${status}`;
+    const response = await axios.get(url);
 
     if (!response.data) {
       throw new Error("Empty response from server");
@@ -11,7 +13,14 @@ const getProducts = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching products", error);
-    throw error;
+
+    if (error.response) {
+      throw new Error(`Server error: ${error.response.status}`);
+    } else if (error.request) {
+      throw new Error("Network error: Could not reach server");
+    } else {
+      throw error;
+    }
   }
 };
 
