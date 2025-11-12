@@ -14,14 +14,19 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <footer className="footer bg-black text-white" id="footer">
+    <footer
+      className="footer navbar navbar-dark bg-black text-white"
+      id="footer"
+    >
       <Container className="py-4">
         <Row className="g-4 pt-3">
           <Col xs={12} md={6} lg={2} xl={3}>
             <header className="mb-3">
               <h4 className="fw-bold mb-3">NovaStore</h4>
-              <p className="mb-2 fw-semibold">Atención al cliente:</p>
-              <p className="mb-0">0810-222-2800</p>
+              <p className="mb-0">
+                Tu tienda online con las últimas tendencias y los mejores
+                precios. Calidad y estilo en cada artículo.
+              </p>
             </header>
 
             <ul className="d-flex gap-3 mt-3 list-unstyled">
@@ -136,32 +141,31 @@ function Footer() {
           </Col>
         </Row>
 
-        <hr className="my-4" />
+        <hr
+          className="my-4"
+          style={{ border: "1px solid #fff", opacity: 0.5, width: "100%" }}
+        />
 
-        <Row className="align-items-center">
-          <Col xs={12} lg={8} className="mb-3 mb-lg-0">
-            <p className="mb-1 small fw-semibold">
-              Copyright © 2025 NovaStore. Todos los derechos reservados.
-              Desarrollado por{" "}
-              <a
-                href="https://emmanuel-cruz.netlify.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white footer__developer-link"
-                aria-label="Emmanuel Cruz"
-                title="Emmanuel Cruz Portfolio"
-              >
-                Emmanuel Cruz
-              </a>
-              .
-            </p>
-            <p className="mb-0 small" style={{ color: "#6c757d" }}>
-              Las imágenes son meramente ilustrativas; los precios y stock
-              pueden variar sin previo aviso.
-            </p>
-          </Col>
-
-          <Col xs={12} lg={4} style={{ textAlign: "right" }}></Col>
+        <Row>
+          <p className="mb-1 small fw-semibold">
+            Copyright © 2025 NovaStore. Todos los derechos reservados.
+            Desarrollado por{" "}
+            <a
+              href="https://emmanuel-cruz.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white footer__developer-link"
+              aria-label="Emmanuel Cruz"
+              title="Emmanuel Cruz Portfolio"
+            >
+              Emmanuel Cruz
+            </a>
+            .
+          </p>
+          <p className="mb-0 small" style={{ color: "#6c757d" }}>
+            Las imágenes son meramente ilustrativas; los precios y stock pueden
+            variar sin previo aviso.
+          </p>
         </Row>
       </Container>
     </footer>
