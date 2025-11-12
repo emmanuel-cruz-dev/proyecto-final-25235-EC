@@ -6,7 +6,6 @@ import { categories } from "../data/categories";
 import { useQueryHandler } from "../hooks/useQueryHandler";
 import { usePagination } from "../hooks/usePagination";
 import PaginationItem from "../components/common/PaginationItem";
-// import PaginationItem from "../components/ui/PaginationItem";
 
 function Products() {
   const { selectedCategory, handleCategoryClick } = useQueryHandler();
