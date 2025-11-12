@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import { User, Heart, ShoppingBag, LogOut, Camera } from "lucide-react";
+import { Camera } from "lucide-react";
 import { Card, Button, ListGroup, Image } from "react-bootstrap";
 import { AuthContext } from "../../../hooks/useAuth";
 import { useUpdateUser } from "../../../hooks/auth/useUpdateUser";
 import AvatarUpdateModal from "../../modals/AvatarUpdateModal";
 
-function ProfileSidebar({ activeSection, setActiveSection }) {
+function ProfileSidebar({ menuItems, activeSection, setActiveSection }) {
   const { user, logout, updateUserProfile } = useContext(AuthContext);
   const { updateUser, loading } = useUpdateUser();
 
@@ -49,13 +49,6 @@ function ProfileSidebar({ activeSection, setActiveSection }) {
     }
   };
 
-  const menuItems = [
-    { id: "profile", icon: User, label: "Mi Perfil" },
-    { id: "favorites", icon: Heart, label: "Mis Favoritos" },
-    { id: "orders", icon: ShoppingBag, label: "Mis Pedidos" },
-    { id: "logout", icon: LogOut, label: "Cerrar Sesión" },
-  ];
-
   const handleMenuClick = (menuId) => {
     if (menuId === "logout") {
       if (window.confirm("¿Seguro que quieres cerrar sesión?")) logout();
@@ -70,10 +63,7 @@ function ProfileSidebar({ activeSection, setActiveSection }) {
         <Card.Body>
           <div className="position-relative d-inline-block mb-3">
             <Image
-              src={
-                profileData.avatar ||
-                "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
-              }
+              src={profileData.avatar || "https://i.imgur.com/p4HoTq6.jpeg"}
               roundedCircle
               className="border border-3 border-light shadow"
               style={{
