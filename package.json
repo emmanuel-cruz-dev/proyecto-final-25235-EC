@@ -13,6 +13,7 @@
     "@lucide/lab": "^0.1.2",
     "axios": "^1.13.1",
     "bootstrap": "^5.3.8",
+    "bootswatch": "^5.3.8",
     "lucide-react": "^0.547.0",
     "nprogress": "^0.2.0",
     "react": "^19.1.1",
