@@ -1,10 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import ProductCardSkeleton from "./ProductCardSkeleton";
+import { useAuth } from "../../hooks/useAuth";
+import { useProductCard } from "../../hooks/useProductCard";
 import { formatPrice } from "../../utils/utils";
 
-function ProductCard({ id, name, price, description, image, isLoading }) {
-  if (isLoading) return <p>Loading...</p>;
+function ProductCard(props) {
+  const { isAuthenticated } = useAuth();
+  const {
+    id = 0,
+    name = "",
+    price = 0,
+    category = "",
+    description = "",
+    image = "",
+  } = props;
+  const { handleAddToCartClick } = useProductCard({
+    id,
+    name,
+    price,
+    category,
+    description,
+    image,
+  });
+
+  if (props.isLoading) return <ProductCardSkeleton />;
 
   return (
     <Card>
@@ -40,12 +61,24 @@ function ProductCard({ id, name, price, description, image, isLoading }) {
         <Card.Text className="line-clamp-2 text-secondary">
           {description}
         </Card.Text>
-        <Button
-          variant="primary"
-          className="mt-3 d-inline-flex justify-content-center gap-2 px-4 w-100"
-        >
-          Añadir al carrito
-        </Button>
+        {isAuthenticated ? (
+          <Button
+            variant="primary"
+            className="mt-3 d-inline-flex justify-content-center gap-2 px-4 w-100"
+            onClick={handleAddToCartClick}
+          >
+            Añadir al carrito
+          </Button>
+        ) : (
+          <Link to="/login">
+            <Button
+              variant="primary"
+              className="mt-3 d-inline-flex justify-content-center gap-2 px-4 w-100"
+            >
+              Inicia sesión para comprar
+            </Button>
+          </Link>
+        )}
       </Card.Body>
     </Card>
   );
