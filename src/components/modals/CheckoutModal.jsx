@@ -26,9 +26,11 @@ function CheckoutModal({ show, onHide, orderTotal, itemsCount }) {
           <CheckCircle size={64} className="text-success" />
         </figure>
 
-        <h2 className="mb-2">¡Compra realizada con éxito!</h2>
+        <h2 className="mb-2" style={{ fontSize: "1.75rem" }}>
+          ¡Compra realizada con éxito!
+        </h2>
 
-        <p className="text-muted mb-4">
+        <p className="text-muted mb-3">
           {user && (
             <>
               Gracias por tu compra{" "}
