@@ -86,6 +86,11 @@ export const useProductsByCategory = (category) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!category) {
+      setProducts([]);
+      return;
+    }
+
     const fetchProductsByCategory = async () => {
       setLoading(true);
       setError(null);
