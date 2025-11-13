@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProfileSidebar from "../components/ui/user/ProfileSidebar";
 import ProfileMainContent from "../components/ui/user/ProfileMainContent";
+import ProductsTable from "../components/product/ProductsTable";
+import { useAuth } from "../hooks/useAuth";
+import { adminMenuItems, userMenuItems } from "../data/menuItems";
+import UsersTable from "../components/ui/user/UsersTable";
 
 function Profile() {
+  const { user } = useAuth();
+  const isAdmin = user?.role === "admin";
   const [activeSection, setActiveSection] = useState("profile");
+
+  const menuItems = useMemo(() => {
+    if (isAdmin) {
+      return adminMenuItems;
+    }
+
+    return userMenuItems;
+  }, [isAdmin]);
 
   const renderSection = () => {
     switch (activeSection) {
       case "profile":
         return <ProfileMainContent />;
+      case "products":
+        return <ProductsTable />;
+      case "users":
+        return <UsersTable />;
       case "favorites":
         return <div>Favoritos</div>;
       case "orders":
@@ -24,6 +42,7 @@ function Profile() {
       <Row>
         <Col lg={3} className="mb-4">
           <ProfileSidebar
+            menuItems={menuItems}
             setActiveSection={setActiveSection}
             activeSection={activeSection}
           />
