@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useProductById } from "../hooks/useProducts";
+import { useProductById, useProductsByCategory } from "../hooks/useProducts";
 import ProductSlideList from "../components/product/ProductSlideList";
 import ProductDetailsCard from "../components/product/ProductDetailsCard";
 
@@ -7,12 +7,23 @@ function Product() {
   const { id } = useParams();
   const idNumber = Number(id);
   const { product, loading } = useProductById(idNumber);
+  const productCategory = product?.category;
+  const {
+    products,
+    loading: isProductsLoading,
+    error,
+  } = useProductsByCategory(productCategory);
 
   return (
     <section>
       <ProductDetailsCard product={product} isLoading={loading} />
       <article>
-        <ProductSlideList title="Productos Destacados" />
+        <ProductSlideList
+          title="Productos Relacionados"
+          products={products}
+          loading={isProductsLoading}
+          error={error}
+        />
       </article>
     </section>
   );
