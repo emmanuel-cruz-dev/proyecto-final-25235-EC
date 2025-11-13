@@ -7,10 +7,12 @@ const Register = lazy(() => import("../pages/Register"));
 const Profile = lazy(() => import("../pages/Profile"));
 const Cart = lazy(() => import("../pages/Cart"));
 const Products = lazy(() => import("../pages/Products"));
+const Product = lazy(() => import("../pages/Product"));
 
 export const publicRoutes = [
   { path: "/", element: <Home /> },
   { path: "/products", element: <Products /> },
+  { path: "/product/:id", element: <Product /> },
   {
     path: "/login",
     element: <Login />,
