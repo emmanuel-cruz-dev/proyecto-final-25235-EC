@@ -2,7 +2,7 @@ import { useCart } from "./useCart";
 
 export const useProductCard = ({
   id,
-  title,
+  name,
   price,
   category,
   description,
@@ -13,7 +13,7 @@ export const useProductCard = ({
   const handleAddToCartClick = () => {
     const product = {
       id,
-      title,
+      name,
       price,
       category,
       description,
