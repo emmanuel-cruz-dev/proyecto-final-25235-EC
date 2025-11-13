@@ -7,16 +7,21 @@ export const useProducts = (page, limit, status = "true") => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    try {
-      productService.getProducts(page, limit, status).then((data) => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const data = await productService.getProducts(page, limit, status);
         setProducts(data);
-      });
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, [page, limit, status]);
 
   return { products, loading, error };
@@ -28,16 +33,22 @@ export const useProductById = (id) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    try {
-      productService.getProductById(id).then((data) => {
+    const fetchProduct = async () => {
+      setLoading(true);
+      setError(null);
+      setProduct(null);
+
+      try {
+        const data = await productService.getProductById(id);
         setProduct(data);
-      });
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
   }, [id]);
 
   return { product, loading, error };
@@ -49,16 +60,21 @@ export const useActiveProducts = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    try {
-      productService.getActiveProducts().then((data) => {
+    const fetchActiveProducts = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const data = await productService.getActiveProducts();
         setProducts(data);
-      });
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchActiveProducts();
   }, []);
 
   return { products, loading, error };
@@ -70,16 +86,21 @@ export const useProductsByCategory = (category) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    try {
-      productService.getProductsByCategory(category).then((data) => {
+    const fetchProductsByCategory = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const data = await productService.getProductsByCategory(category);
         setProducts(data);
-      });
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductsByCategory();
   }, [category]);
 
   return { products, loading, error };
