@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Bounce, ToastContainer } from "react-toastify";
 import { useNewsletterSubscription } from "../../../hooks/useNewsletterSubscription";
 
 function Newsletter() {
@@ -79,6 +80,12 @@ function Newsletter() {
           </Col>
         </Row>
       </Container>
+      <ToastContainer
+        position="bottom-left"
+        pauseOnHover={true}
+        theme="dark"
+        transition={Bounce}
+      />
     </section>
   );
 }
