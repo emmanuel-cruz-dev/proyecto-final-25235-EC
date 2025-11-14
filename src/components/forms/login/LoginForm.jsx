@@ -1,26 +1,78 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
-import { Eye, EyeOff } from "lucide-react";
-import { AuthContext } from "../../../hooks/useAuth";
+import { Form, Button, InputGroup } from "react-bootstrap";
+import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { useAuth } from "../../../hooks/useAuth";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const { login } = useContext(AuthContext);
+  const [errors, setErrors] = useState({});
+
+  const { login, authLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!loginData.email.trim()) {
+      newErrors.email = "El email es requerido";
+    } else if (!/\S+@\S+\.\S+/.test(loginData.email)) {
+      newErrors.email = "El email no es válido";
+    }
+
+    if (!loginData.password) {
+      newErrors.password = "La contraseña es requerida";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setLoginData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    if (authLoading) return;
+
+    if (!validateForm()) return;
 
     try {
-      await login(loginData.email, loginData.password);
-      navigate(from, { replace: true });
+      const loggedUser = await login(loginData.email, loginData.password);
+
+      setErrors({});
+
+      setTimeout(() => {
+        if (loggedUser.role === "admin") {
+          navigate("/profile", { replace: true });
+        } else if (from && from !== "/login") {
+          navigate(from, { replace: true });
+        } else {
+          navigate("/", { replace: true });
+        }
+      }, 100);
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+      if (error.message.includes("El correo electrónico no está registrado")) {
+        setErrors((prev) => ({
+          ...prev,
+          email: "El correo electrónico no está registrado",
+        }));
+      } else if (error.message.includes("La contraseña es incorrecta")) {
+        setErrors((prev) => ({
+          ...prev,
+          password: "La contraseña es incorrecta",
+        }));
+      } else {
+        console.error("Error al iniciar sesión:", error);
+      }
     }
   };
 
@@ -30,59 +82,51 @@ function LoginForm() {
         <Form.Label>
           Correo electrónico <span className="text-danger">*</span>
         </Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Ej. nombre@mail.com"
-          value={loginData.email}
-          onChange={(e) =>
-            setLoginData({ ...loginData, email: e.target.value })
-          }
-          required
-        />
+        <InputGroup hasValidation>
+          <InputGroup.Text>
+            <Mail size={18} />
+          </InputGroup.Text>
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="Ej. nombre@mail.com"
+            value={loginData.email}
+            onChange={handleChange}
+            isInvalid={!!errors.email}
+          />
+          <Form.Control.Feedback type="invalid">
+            {errors.email}
+          </Form.Control.Feedback>
+        </InputGroup>
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <div className="d-flex justify-content-between align-items-center mb-2">
-          <Form.Label className="mb-0">
-            Contraseña <span className="text-danger">*</span>
-          </Form.Label>
-        </div>
-        <div className="position-relative">
+        <Form.Label>
+          Contraseña <span className="text-danger">*</span>
+        </Form.Label>
+        <InputGroup hasValidation>
+          <InputGroup.Text>
+            <Lock size={18} />
+          </InputGroup.Text>
           <Form.Control
             type={showPassword ? "text" : "password"}
+            name="password"
             placeholder="********"
             value={loginData.password}
-            onChange={(e) =>
-              setLoginData({
-                ...loginData,
-                password: e.target.value,
-              })
-            }
-            required
+            onChange={handleChange}
+            isInvalid={!!errors.password}
           />
-          <button
-            type="button"
+          <Button
+            variant="light"
             onClick={() => setShowPassword(!showPassword)}
-            style={{
-              position: "absolute",
-              right: "10px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              border: "none",
-              background: "none",
-              cursor: "pointer",
-              padding: "5px",
-              display: "flex",
-              alignItems: "center",
-            }}
+            tabIndex={-1}
           >
-            {showPassword ? (
-              <Eye size={20} className="text-secondary" />
-            ) : (
-              <EyeOff size={20} className="text-secondary" />
-            )}
-          </button>
-        </div>
+            {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+          </Button>
+          <Form.Control.Feedback type="invalid">
+            {errors.password}
+          </Form.Control.Feedback>
+        </InputGroup>
       </Form.Group>
 
       <footer
@@ -94,8 +138,9 @@ function LoginForm() {
           type="submit"
           className="px-5 py-2 flex-grow-1 flex-md-grow-0"
           style={{ borderRadius: "25px", fontWeight: "500" }}
+          disabled={authLoading}
         >
-          Iniciar Sesión
+          {authLoading ? "Iniciando sesión..." : "Iniciar Sesión"}
         </Button>
         <p className="d-lg-none text-muted text-center mt-3 mb-0">
           ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
