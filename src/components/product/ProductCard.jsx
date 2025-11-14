@@ -4,7 +4,7 @@ import { Card, Button } from "react-bootstrap";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import { useAuth } from "../../hooks/useAuth";
 import { useProductCard } from "../../hooks/useProductCard";
-import { formatPrice } from "../../utils/utils";
+import { formatPrice, priceInstallments } from "../../utils/utils";
 
 function ProductCard(props) {
   const { isAuthenticated } = useAuth();
@@ -60,6 +60,9 @@ function ProductCard(props) {
           style={{ color: "blue", fontSize: "1.2rem", fontWeight: "500" }}
         >
           ${formatPrice(price)}
+        </Card.Text>
+        <Card.Text className="text-primary my-0">
+          6 cuotas de ${priceInstallments(price)}
         </Card.Text>
         <Card.Text className="line-clamp-2 text-secondary">
           {description}
