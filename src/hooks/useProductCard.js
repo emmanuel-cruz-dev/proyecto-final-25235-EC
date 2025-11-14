@@ -10,7 +10,7 @@ export const useProductCard = ({
 }) => {
   const { handleAddToCart } = useCart();
 
-  const handleAddToCartClick = () => {
+  const handleAddToCartClick = (quantity = 1) => {
     const product = {
       id,
       name,
@@ -19,7 +19,8 @@ export const useProductCard = ({
       description,
       image,
     };
-    handleAddToCart(product);
+
+    handleAddToCart(product, quantity);
   };
 
   return { handleAddToCartClick };
