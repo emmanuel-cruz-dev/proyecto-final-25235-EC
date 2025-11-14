@@ -4,18 +4,18 @@ import { CartContext } from "../hooks/useCart";
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (product, quantity = 1) => {
     const existingProductIndex = cart.findIndex((p) => p.id === product.id);
 
     if (existingProductIndex !== -1) {
       const newCart = cart.map((item, index) =>
         index === existingProductIndex
-          ? { ...item, quantity: item.quantity + 1 }
+          ? { ...item, quantity: item.quantity + quantity }
           : item
       );
       setCart(newCart);
     } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
+      setCart([...cart, { ...product, quantity }]);
     }
   };
 
