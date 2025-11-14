@@ -11,6 +11,7 @@ function ProductCard(props) {
   const {
     id = 0,
     name = "",
+    brand = "",
     price = 0,
     category = "",
     description = "",
@@ -19,6 +20,7 @@ function ProductCard(props) {
   const { handleAddToCartClick } = useProductCard({
     id,
     name,
+    brand,
     price,
     category,
     description,
@@ -51,7 +53,8 @@ function ProductCard(props) {
         />
       </Link>
       <Card.Body>
-        <Card.Title className="line-clamp-1">{name}</Card.Title>
+        <Card.Title className="line-clamp-1 mb-0">{name}</Card.Title>
+        <Card.Text className="text-secondary my-0">{brand}</Card.Text>
         <Card.Text
           className="mb-1"
           style={{ color: "blue", fontSize: "1.2rem", fontWeight: "500" }}
@@ -64,7 +67,7 @@ function ProductCard(props) {
         {isAuthenticated ? (
           <Button
             variant="primary"
-            className="mt-3 d-inline-flex justify-content-center gap-2 px-4 w-100"
+            className="mt-2 d-inline-flex justify-content-center gap-2 px-4 w-100"
             onClick={handleAddToCartClick}
           >
             Añadir al carrito
@@ -73,7 +76,7 @@ function ProductCard(props) {
           <Link to="/login">
             <Button
               variant="primary"
-              className="mt-3 d-inline-flex justify-content-center gap-2 px-4 w-100"
+              className="mt-2 d-inline-flex justify-content-center gap-2 px-4 w-100"
             >
               Inicia sesión para comprar
             </Button>
