@@ -28,7 +28,7 @@ function CheckoutSummary({ orderTotal, itemsCount }) {
   ];
 
   return (
-    <section className="bg-light rounded p-4 py-3 mb-4">
+    <section className="bg-light rounded p-4 py-2 mb-4">
       {summaryData.map((item) => (
         <SummaryRow
           key={item.label}
