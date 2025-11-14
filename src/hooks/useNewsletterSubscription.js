@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export const useNewsletterSubscription = () => {
   const [email, setEmail] = useState("");
+  const notify = (name) => toast.success(`¡Gracias por suscribirte ${name}!`);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    notify(email);
     setEmail("");
-    alert(`¡Gracias por suscribirte ${email}!`);
   };
 
   return { email, setEmail, handleSubmit };
