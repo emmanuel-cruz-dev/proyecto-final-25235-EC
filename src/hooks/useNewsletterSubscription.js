@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 export const useNewsletterSubscription = () => {
   const [email, setEmail] = useState("");
-  const notify = (name) => toast.success(`¡Gracias por suscribirte ${name}!`);
+  const notify = (name) => toast.info(`¡Gracias por suscribirte ${name}!`);
 
   const handleSubmit = (e) => {
     e.preventDefault();
