@@ -8,3 +8,8 @@ export function formatPrice(price) {
 export function handleRetry() {
   window.location.reload();
 }
+
+export function priceInstallments(price) {
+  const newPrice = Math.floor(price / 6);
+  return formatPrice(newPrice);
+}
