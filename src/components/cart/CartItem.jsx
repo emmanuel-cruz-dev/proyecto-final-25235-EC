@@ -29,7 +29,7 @@ const CartItem = ({ product, index }) => {
             {product.image ? (
               <img
                 src={product.image}
-                alt={product.title}
+                alt={product.name}
                 className="img-fluid rounded py-3"
                 loading="lazy"
                 style={{
@@ -45,7 +45,7 @@ const CartItem = ({ product, index }) => {
         </Col>
 
         <Col xs={12} sm={4}>
-          <h6 className="mb-1 line-clamp-1">{product.title}</h6>
+          <h6 className="mb-1 line-clamp-1">{product.name}</h6>
           <p className="mb-0 small fw-semibold">
             Precio unitario: ${formatPrice(product.price)}
           </p>
