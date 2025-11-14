@@ -66,6 +66,7 @@ function ProductSlideList({ title, products, loading, error }) {
               <ProductCard
                 id={product.id}
                 name={product.name}
+                brand={product.brand}
                 price={product.price}
                 description={product.description}
                 category={product.category}
