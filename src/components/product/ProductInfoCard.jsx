@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Button, Badge } from "react-bootstrap";
 import { Star, ShoppingCart, Heart } from "lucide-react";
@@ -8,7 +9,7 @@ const ProductInfoCard = ({ product }) => {
   const { isAuthenticated } = useAuth();
   const { handleAddToCartClick } = useProductCard({
     id: product.id || 0,
-    title: product.title || "",
+    name: product.name || "",
     price: product.price || 0,
     category: product.category || "",
     description: product.description || "",
@@ -21,7 +22,7 @@ const ProductInfoCard = ({ product }) => {
         <Badge bg="secondary" className="my-2 p-2">
           {product.category}
         </Badge>
-        <h2 className="fw-bold mb-3">{product.title}</h2>
+        <h2 className="fw-bold mb-3">{product.name}</h2>
         <div className="d-flex align-items-center mb-3">
           <div className="d-flex me-2">
             {[...Array(5)].map((_, index) => (
