@@ -28,7 +28,8 @@ function ProductsGallery({ title, products, loading, error }) {
             <Col key={product.id} xs={12} md={6} lg={4} xl={4}>
               <ProductCard
                 id={product.id}
-                title={product.title}
+                name={product.name}
+                brand={product.brand}
                 price={product.price}
                 description={product.description}
                 category={product.category}
