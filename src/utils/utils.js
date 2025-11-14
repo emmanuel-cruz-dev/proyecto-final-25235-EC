@@ -13,3 +13,18 @@ export function priceInstallments(price) {
   const newPrice = Math.floor(price / 6);
   return formatPrice(newPrice);
 }
+
+export function renderCategory(category) {
+  switch (category) {
+    case "tecnologia":
+      return "Tecnología";
+    case "gaming":
+      return "Gaming";
+    case "hombres":
+      return "Ropa de Hombre";
+    case "mujeres":
+      return "Ropa de Mujer";
+    default:
+      return "Todos los productos";
+  }
+}
