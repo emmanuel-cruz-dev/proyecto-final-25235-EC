@@ -165,3 +165,75 @@
     opacity: 0.6;
   }
 }
+
+.cart__items-container {
+  position: relative;
+}
+
+.cart__items-badge {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: var(--bs-primary);
+  color: var(--bs-white);
+  border-radius: 5rem;
+  z-index: 1;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loader-logo {
+  width: 20rem;
+  animation: fadeIn 0.6s ease forwards, pulse 1.5s infinite ease-in-out;
+}
+
+.loader-spinner {
+  border: 4px solid #eee;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
