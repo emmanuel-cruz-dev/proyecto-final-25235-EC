@@ -16,7 +16,7 @@ function BannerCarousel({ images }) {
       activeIndex={index}
       onSelect={handleSelect}
       interval={3000}
-      pauseOnHover
+      pause="hover"
     >
       {images.map((img, index) => (
         <Carousel.Item
