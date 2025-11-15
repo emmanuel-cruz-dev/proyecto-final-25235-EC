@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import NavigationBar from "./layouts/NavigationBar";
 import Footer from "./layouts/Footer";
