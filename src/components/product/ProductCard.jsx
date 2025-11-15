@@ -71,7 +71,7 @@ function ProductCard(props) {
           <Button
             variant="primary"
             className="mt-2 d-inline-flex justify-content-center gap-2 px-4 w-100"
-            onClick={handleAddToCartClick}
+            onClick={() => handleAddToCartClick(1)}
           >
             Añadir al carrito
           </Button>
